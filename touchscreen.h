@@ -24,7 +24,7 @@ private:
     std::vector<powerLabel *>yearLbls,trophyLbls,logoLbls,titleLbls;
     powerLabel *backLbl;
     int activeContent;
-    mpvWidget *logo5Player;
+    mpvWidget *logoPlayer;
 private slots:
     void loadPlayer(void);
     void buttonClick(void);

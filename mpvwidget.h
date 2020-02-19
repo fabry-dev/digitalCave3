@@ -32,6 +32,7 @@ public slots:
     void rewind();
     void setFileToLoad(QString file);
     void playPredefinedFile(void);
+    void loadPredefinedFile(void);
 
 signals:
     void durationChanged(int value);

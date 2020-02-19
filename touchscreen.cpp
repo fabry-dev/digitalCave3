@@ -86,21 +86,22 @@ touchScreen::touchScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PAT
         if((i == 5)||(i==6)||(i==7)||(i==12))
         {
             logoLbl = new powerLabel(this,0,QRect(width()/2,0,0,0),QRect(logoX,logoY,640,360),false);
-            logo5Player = new mpvWidget(logoLbl);
-            logo5Player->resize(640,360);
-            logo5Player->setProperty("keep-open","yes");
-            logo5Player->setLoop(true);
-            logo5Player->show();
-            logo5Player->setFileToLoad(PATH+"logo/"+QString::number(i)+".mp4");
+            logoPlayer = new mpvWidget(logoLbl);
+            logoPlayer->resize(640,360);
+            logoPlayer->setProperty("keep-open","yes");
+            logoPlayer->setLoop(true);
+            logoPlayer->show();
+            logoPlayer->setFileToLoad(PATH+"logo/"+QString::number(i)+".mp4");
 
             QLabel *blackLbl = new QLabel(logoLbl);
             blackLbl->setStyleSheet("QLabel { background-color : black; }");
-            blackLbl->resize(logo5Player->size());
+            blackLbl->resize(logoPlayer->size());
             blackLbl->raise();
             blackLbl->show();
-
-            connect(logoLbl,SIGNAL(showAnimationOver()),logo5Player,SLOT(playPredefinedFile()));
-            connect(logoLbl,SIGNAL(hideAnimationOver()),logo5Player,SLOT(stopAndHide()));
+            QTimer::singleShot(500,logoPlayer,SLOT(loadPredefinedFile()));
+            logoLbl->show();//needed to load the file
+            connect(logoLbl,SIGNAL(showAnimationOver()),logoPlayer,SLOT(playAndRaise()));
+            connect(logoLbl,SIGNAL(hideAnimationOver()),logoPlayer,SLOT(stopAndHide()));
 
         }
         else
