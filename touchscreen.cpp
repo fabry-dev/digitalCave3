@@ -39,6 +39,9 @@ touchScreen::touchScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PAT
 
     for(int i = 0;i<16;i++)
     {
+        if(i == 13)
+            continue;
+
         QPixmap pix(PATH+"award/"+QString::number(i)+".png");
         QRect showG = QRect(buttonsTouchX[i]-pix.width()/2,buttonsTouchY[i]-pix.height()/2,pix.width(),pix.height());
         QRect hideG = led2screen(QRect(buttonsLedX[i],buttonsLedY[i],pix.width()*ledAwardsRatio,pix.height()*ledAwardsRatio));
@@ -66,6 +69,8 @@ touchScreen::touchScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PAT
 
     for(int i = 0;i<16;i++)
     {
+        if(i == 13)
+            continue;
 
         int yearY = 200;
         QPixmap yearPix(PATH+"year/"+QString::number(i)+".png");

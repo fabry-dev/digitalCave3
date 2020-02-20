@@ -42,6 +42,9 @@ ledScreen::ledScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PATH)
 
     for(int i = 0;i<16;i++)
     {
+
+        if(i == 13)
+            continue;
         QPixmap pix(PATH+"award/"+QString::number(i)+".png");
        // pix = pix.scaled((double)pix.width()*ledAwardsRatio,(double)pix.height()*ledAwardsRatio);
         QRect hideG = touch2led(QRect(buttonsTouchX[i]-pix.width()/2,buttonsTouchY[i]-pix.height()/2,pix.width(),pix.height()));
