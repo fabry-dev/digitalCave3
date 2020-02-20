@@ -4,6 +4,7 @@
 
 #include "positions.h"
 
+#define TIMEOUT_DELAY 30*1000
 
 touchScreen::touchScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PATH)
 {
@@ -25,7 +26,8 @@ touchScreen::touchScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PAT
     introVp->setMute(false);
     introVp->show();
 
-
+    timeOutTimer = new QTimer(this);
+    connect(timeOutTimer,SIGNAL(timeout()),this,SLOT(showAwardsList()));
 
     QLabel *iktvaLbl = new QLabel(this);
     QImage iktva(PATH+"iktva.png");
@@ -175,6 +177,8 @@ void touchScreen::selectAward(int awardId)
     emit onAwardSelected();
 
 
+    timeOutTimer->start(TIMEOUT_DELAY);
+
     for(auto b:awardButtons)
         b->animateHide();
 
@@ -201,6 +205,8 @@ void touchScreen::showAwardsList()
     logoLbls[activeContent]->animateHide();
     trophyLbls[activeContent]->animateHide();
     backLbl->animateHide();
+
+    timeOutTimer->stop();
 }
 
 

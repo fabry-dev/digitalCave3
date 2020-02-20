@@ -25,6 +25,8 @@ private:
     powerLabel *backLbl;
     int activeContent;
     mpvWidget *logoPlayer;
+
+    QTimer *timeOutTimer;
 private slots:
     void loadPlayer(void);
     void buttonClick(void);
