@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
     udpListener *socket = new udpListener(NULL);
 
     touchScreen *ts = new touchScreen(NULL,PATH);
-    ts->setGeometry(a.screens()[2]->geometry().x(),a.screens()[2]->geometry().y(),1080,1920);
+    ts->setGeometry(a.screens()[1]->geometry().x(),a.screens()[1]->geometry().y(),1080,1920);
     ts->showFullScreen();
 
 
