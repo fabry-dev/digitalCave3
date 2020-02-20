@@ -207,10 +207,17 @@ void touchScreen::showAwardsList()
         b->animateShow();
     }
 
-    titleLbls[activeContent]->animateHide();
-    yearLbls[activeContent]->animateHide();
-    logoLbls[activeContent]->animateHide();
-    trophyLbls[activeContent]->animateHide();
+    for(auto t: titleLbls)
+        if(t->isVisible())t->animateHide();
+    for(auto t: yearLbls)
+        if(t->isVisible())t->animateHide();
+    for(auto t: trophyLbls)
+        if(t->isVisible())t->animateHide();
+    for(auto t: logoLbls)
+        if(t->isVisible())t->animateHide();
+
+
+
     backLbl->animateHide();
 
     timeOutTimer->stop();
