@@ -71,7 +71,7 @@ void mpvWidget::loadFile(QString videoFile)
 {
     QByteArray ba = videoFile.toLatin1();
     //command(QStringList() << "loadfile" << videoFile<<"append-play");
-    command(QStringList() << "loadfile" << videoFile << "replace");
+    command(QStringList() << "loadfile" << videoFile);
     setProperty("pause",false);
 }
 
@@ -80,26 +80,39 @@ void mpvWidget::loadFilePaused(QString videoFile)
     QByteArray ba = videoFile.toLatin1();
     //command(QStringList() << "loadfile" << videoFile<<"append-play");
     setProperty("pause",true);
-    command(QStringList() << "loadfile" << videoFile<<"replace");
+    command(QStringList() << "loadfile" << videoFile);
 
 }
 
 
 void mpvWidget::rewind(void)
 {
-    //qDebug()<<"rewind";
+
+    command(QStringList()<< "seek"<<"0"<<"absolute"<<"exact");
+
+}
+
+
+void mpvWidget::rewindAndPlay(void)
+{
+
     command(QStringList()<< "seek"<<"0"<<"absolute"<<"exact");
     setProperty("pause",false);
 }
 
+
 void mpvWidget::stop()
 {
-
     const char *cmd[] = {"stop",NULL, NULL};
-
-
-
 }
+
+
+void mpvWidget::setMute(bool mute)
+{
+
+    setProperty("mute",mute);
+}
+
 
 
 void mpvWidget::stopAndHide(void)
@@ -130,7 +143,7 @@ void mpvWidget::play()
     setProperty("pause",false);
     const char *cmd[] = {"play",NULL, NULL};
     mpv_command(mpv, cmd);
-
+ //raise();
 }
 
 void mpvWidget::playAndRaise()
@@ -139,7 +152,7 @@ void mpvWidget::playAndRaise()
     const char *cmd[] = {"play",NULL, NULL};
     mpv_command(mpv, cmd);
     raise();
-
+    show();
 
 }
 
@@ -154,8 +167,18 @@ void mpvWidget::setLoop(bool looping)
 void mpvWidget::setFileToLoad(QString file)
 {
 
-    show();
+
     filename = file;
+}
+
+
+
+void mpvWidget::loadPredefinedFile(void)
+{
+    show();
+    raise();
+    loadFilePaused(filename);
+
 }
 
 
@@ -168,13 +191,6 @@ void mpvWidget::playPredefinedFile(void)
     raise();
 }
 
-void mpvWidget::loadPredefinedFile(void)
-{
-    show();
-    raise();
-    loadFilePaused(filename);
-
-}
 
 
 void mpvWidget::setCrop()
@@ -314,3 +330,11 @@ void mpvWidget::mousePressEvent(QMouseEvent *event)
 {
     emit clicked(event->pos());
 }
+
+
+
+
+
+
+
+

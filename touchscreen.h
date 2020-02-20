@@ -18,7 +18,7 @@ public:
 
 private:
     QString PATH;
-    mpvWidget *bgVp;
+    mpvWidget *bgVp,*introVp;
     std::vector<powerLabel*>awardButtons;
     QRect led2screen(QRect original);
     std::vector<powerLabel *>yearLbls,trophyLbls,logoLbls,titleLbls;
@@ -30,7 +30,8 @@ private slots:
     void buttonClick(void);
     void selectAward(int awardId);
     void showAwardsList(void);
-
+    void startIntroVideo(void);
+    void stopIntroVideo(void);
 signals:
     void bgShouldRestart(void);
     void onAwardSelected(void);

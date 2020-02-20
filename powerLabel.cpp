@@ -28,7 +28,10 @@ powerLabel::powerLabel(QLabel *parent, int id, QRect hideGeo, QRect showGeo,bool
     zoomIn = new QPropertyAnimation(this,"geometry");
 
     if(floatingMovement)
+    {
         connect(showAnim,SIGNAL(finished()),this,SLOT(generateFloatingAnim()));
+        connect(floatingAnim,SIGNAL(finished()),this,SLOT(generateFloatingAnim()));
+    }
 
 }
 
@@ -77,6 +80,7 @@ void powerLabel::mousePressEvent(QMouseEvent *ev)
 
 void powerLabel::stopFloating()
 {
+
     floatingMovement = false;
 }
 
@@ -85,14 +89,17 @@ void powerLabel::generateFloatingAnim(void)
 {
 
     if((!floatingMovement )&&(!floatingGone))
-        return;
-
-    if((floatingFlagStop ))
     {
-        floatingFlagStop = false;
+
         return;
     }
 
+    if((floatingFlagStop ))
+    {
+
+        floatingFlagStop = false;
+        return;
+    }
 
 
 
@@ -119,7 +126,6 @@ void powerLabel::generateFloatingAnim(void)
     floatingGone = !floatingGone;
 
 
-    connect(floatingAnim,SIGNAL(finished()),this,SLOT(generateFloatingAnim()));
     floatingAnim->start(QAbstractAnimation::KeepWhenStopped);
 
 }

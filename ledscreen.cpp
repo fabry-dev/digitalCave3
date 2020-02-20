@@ -24,6 +24,19 @@ ledScreen::ledScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PATH)
 
     connect(bgVp,SIGNAL(videoRestart()),this,SIGNAL(bgRestart()));
 
+
+    introVp = new mpvWidget(this);
+    introVp->resize(size());
+    introVp->setMute(true);
+    introVp->setProperty("keep-open","yes");
+    introVp->setLoop(false);
+    introVp->lower();
+    introVp->show();
+
+
+
+
+
     QTimer::singleShot(10,this,SLOT(loadPlayer()));
 
 
@@ -58,8 +71,26 @@ void ledScreen::loadPlayer()
     bgVp->lower();
     bgVp->loadFilePaused(PATH+"ledBg3.mp4");
     bgVp->play();
+
+    introVp->lower();
+   introVp->loadFilePaused(PATH+"ledIntro3.mp4");
 }
 
+
+
+void ledScreen::startIntroVideo()
+{
+    introVp->playAndRaise();
+    introVp->raise();
+
+}
+
+void ledScreen::stopIntroVideo()
+{
+    introVp->lower();
+    introVp->pause();
+    introVp->rewind();
+}
 
 
 
@@ -77,19 +108,6 @@ void ledScreen::hideAwards(void)
 
     for(auto b:awardButtons)
         b->animateHide();
-}
-
-
-
-
-
-void ledScreen::startVideo(void)
-{
-}
-
-
-void ledScreen::stopVideo(void)
-{
 }
 
 

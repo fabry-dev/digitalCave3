@@ -30,8 +30,10 @@ public slots:
     void play();
     void playAndRaise(void);
     void rewind();
+    void rewindAndPlay(void);
     void setFileToLoad(QString file);
     void playPredefinedFile(void);
+    void setMute(bool);
     void loadPredefinedFile(void);
 
 signals:

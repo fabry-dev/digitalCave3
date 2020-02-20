@@ -15,7 +15,16 @@ touchScreen::touchScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PAT
     bgVp->setLoop(false);
     bgVp->show();
 
-    connect(this,SIGNAL(bgShouldRestart()),bgVp,SLOT(rewind()));
+    connect(this,SIGNAL(bgShouldRestart()),bgVp,SLOT(rewindAndPlay()));
+
+    introVp = new mpvWidget(this);
+    introVp->resize(size());
+    introVp->setProperty("keep-open","yes");
+    introVp->setLoop(false);
+    introVp->lower();
+    introVp->setMute(true);
+    introVp->show();
+
 
 
     QLabel *iktvaLbl = new QLabel(this);
@@ -134,6 +143,22 @@ touchScreen::touchScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PAT
 }
 
 
+void touchScreen::startIntroVideo()
+{
+    introVp->playAndRaise();
+    introVp->raise();
+
+}
+
+void touchScreen::stopIntroVideo()
+{
+    introVp->lower();
+    introVp->pause();
+    introVp->rewind();
+}
+
+
+
 
 
 void touchScreen::buttonClick(void)
@@ -181,11 +206,11 @@ void touchScreen::showAwardsList()
 
 void touchScreen::loadPlayer()
 {
-    bgVp->lower();
+
     bgVp->loadFilePaused(PATH+"touchBg3.mp4");
     bgVp->play();
 
-
+    introVp->loadFilePaused(PATH+"touchIntro3.mp4");
 }
 
 
