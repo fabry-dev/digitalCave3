@@ -22,7 +22,7 @@ touchScreen::touchScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PAT
     introVp->setProperty("keep-open","yes");
     introVp->setLoop(false);
     introVp->lower();
-    introVp->setMute(true);
+    introVp->setMute(false);
     introVp->show();
 
 
