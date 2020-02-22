@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 
     ledScreen * ls = new ledScreen(NULL,PATH);
     ls->setGeometry(a.screens()[0]->geometry().x(),a.screens()[0]->geometry().y(),960,1152);
-    ls->show();//FullScreen();
+    ls->showFullScreen();
 
     a.connect(ls,SIGNAL(bgRestart()),ts,SIGNAL(bgShouldRestart()));
 
