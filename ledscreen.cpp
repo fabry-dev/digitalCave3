@@ -27,7 +27,7 @@ ledScreen::ledScreen(QLabel *parent, QString PATH) : QLabel(parent),PATH(PATH)
 
     introVp = new mpvWidget(this);
     introVp->resize(size());
-    introVp->setMute(true);
+    introVp->setMute(false);
     introVp->setProperty("keep-open","yes");
     introVp->setLoop(false);
     introVp->lower();
